@@ -14,6 +14,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    animation: fadeIn 0.5s ease-in-out; /* Animáció hozzáadása */
 }
 
 h1 {
@@ -39,10 +40,63 @@ ul {
     padding: 0;
 }
 
+/* Lista elemek előtűnése és maradása animáció */
+@keyframes fadeInAndStay {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Alap stílus a lista elemekhez */
 li {
     background-color: #e74c3c;
     color: #fff;
     padding: 10px;
-    margin: 5px 0;
+    margin: 10px 0;
     border-radius: 4px;
+}
+
+/* Az előtűnést és maradást kezelő animáció hozzáadása */
+.fade-in-and-stay {
+    animation: fadeInAndStay 0.5s ease-in-out;
+    opacity: 1; /* Biztosítja, hogy az animáció végén az elemek megmaradnak láthatóként */
+}
+
+
+.button-list-spacing {
+    margin-top: 20px;
+}
+
+/* A checkboxok és az azokhoz tartozó címkék jobb elválasztása */
+input[type="checkbox"] {
+    margin-left: 8px; /* Kicsit jobb elválasztás a checkboxok között */
+}
+
+/* A gomb generálás közötti szünethez animáció hozzáadása */
+.button-list-spacing {
+    margin-top: 20px;
+    animation: none; /* Az alapértelmezett animációt kikapcsoljuk */
+}
+
+/* A generálás gomb pulsáló animációja */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* A generálás gomb animációjának hozzáadása */
+.button-generate-animation {
+    animation: pulse 1s infinite alternate; /* 1 másodperces pulsáló animáció, folyamatosan ismétlődik */
 }

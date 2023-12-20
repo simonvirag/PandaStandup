@@ -32,16 +32,34 @@ function createCheckboxes(items) {
 }
 
 function generateRandomList() {
+    var generateButton = document.querySelector('button');
+    generateButton.classList.add('button-generate-animation');
+
     var selectedItems = getSelectedItems();
     var randomList = document.getElementById('randomList');
-    randomList.innerHTML = '';
+    randomList.innerHTML = ''; // Töröljük a korábbi tartalmat
 
-    var shuffledItems = shuffleArray(selectedItems); // Shuffle függvény hozzáadása
-    shuffledItems.forEach(function(item) {
-        var listItem = document.createElement('li');
-        listItem.textContent = item;
-        randomList.appendChild(listItem);
+    var shuffledItems = shuffleArray(selectedItems);
+
+    // Lista elemek egyesével való megjelenítése
+    shuffledItems.forEach(function(item, index) {
+        setTimeout(function() {
+            var listItem = document.createElement('li');
+            listItem.textContent = item;
+            listItem.classList.add('fade-in-and-stay'); // Hozzáadjuk az animációt
+            randomList.appendChild(listItem);
+
+                   // Amikor elkészült a lista, megjelenítjük a "Copy to Clipboard" gombot
+                   if (index === shuffledItems.length - 1) {
+                    document.getElementById('copyButton').style.display = 'inline-block';
+                }
+        }, index * 500); // Várakozás az egyes elemek közötti idővel (500 milliszekundum = 0.5 másodperc)
     });
+
+    // Gomb animáció eltávolítása a generálás befejeztével
+    setTimeout(function() {
+        generateButton.classList.remove('button-generate-animation');
+    }, shuffledItems.length * 500); // Várakozás az utolsó elem befejezéséig
 }
 
 // Fisher-Yates algoritmus a tömb megkeveréséhez
@@ -69,4 +87,19 @@ function getSelectedItems() {
         return checkbox.id;
     });
     return selectedItems;
+}
+
+
+function copyToClipboard() {
+    var randomList = document.getElementById('randomList');
+    var listText = Array.from(randomList.children).map(li => li.textContent).join('\n');
+
+    var textarea = document.createElement('textarea');
+    textarea.value = listText;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+
+    alert('List copied to clipboard!');
 }

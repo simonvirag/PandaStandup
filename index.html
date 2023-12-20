@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panda Stanup lista generátor</title>
+    <title>Panda Standup lista generátor</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,10 +12,12 @@
 
         <div id="checkboxContainer"></div>
 
-        <button onclick="generateRandomList()">Generálás</button>
+        <button onclick="generateRandomList()" class="button-list-spacing ">Generálás</button>
 
-        <h2>Eredmény:</h2>
+        <h2>A mai sorrend:</h2>
         <ul id="randomList"></ul>
+        <button id="copyButton" onclick="copyToClipboard()" style="display: none;">Másolás vágólapra</button>
+
     </div>
 
     <script src="script.js"></script>
