@@ -97,5 +97,5 @@ function copyToClipboard() {
     document.execCommand('copy');
     document.body.removeChild(textarea);
 
-    alert('List copied to clipboard!');
+    alert('A sorrend kimásolva a vágólapra!');
 }
