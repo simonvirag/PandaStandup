@@ -3,7 +3,7 @@ function getListItems() {
     // Itt kéne implementálni a szerveroldali logikát, például AJAX kéréssel
     // Vissza kell térni a lementett lista elemeivel
     // Példa:
-    return ["Elem 1", "Elem 2", "Elem 3", "Elem 4", "Elem 5"];
+    return ["Szandi", "Jani", "Laci", "Bence", "Gábor", "Laci", "Virág", "Béla"];
 }
 
 // Funkció a checkboxok létrehozásához
