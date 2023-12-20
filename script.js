@@ -1,57 +1,72 @@
-// Ezt a funkciót még implementálnod kell, a kiválasztott lista elemekkel
-function getListItems() {
-    // Itt kéne implementálni a szerveroldali logikát, például AJAX kéréssel
-    // Vissza kell térni a lementett lista elemeivel
-    // Példa:
-    return ["Szandi", "Jani", "Laci", "Bence", "Gábor", "Laci", "Virág", "Béla"];
-}
+document.addEventListener('DOMContentLoaded', function() {
+    var items = [
+        "Szandi",
+        "Bence",
+        "Jani",
+        "Laci",
+        "Béla",
+        "Virág",
+        "Gábor",
+        "Tamás"
+    ];
 
-// Funkció a checkboxok létrehozásához
+    createCheckboxes(items);
+    updateList(items);
+});
+
 function createCheckboxes(items) {
-    var checkboxContainer = document.getElementById("checkboxContainer");
-    checkboxContainer.innerHTML = "";
+    var checkboxContainer = document.getElementById('checkboxContainer');
 
-    for (var i = 0; i < items.length; i++) {
-        var checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.value = items[i];
-        checkbox.id = "checkbox" + i;
+    items.forEach(function(item) {
+        var checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = item;
+        checkbox.checked = true; // Alapértelmezetten mindenki kiválasztva
+        checkboxContainer.appendChild(checkbox);
 
-        var label = document.createElement("label");
-        label.appendChild(checkbox);
-        label.appendChild(document.createTextNode(items[i]));
-
+        var label = document.createElement('label');
+        label.htmlFor = item;
+        label.appendChild(document.createTextNode(item));
         checkboxContainer.appendChild(label);
-    }
+    });
 }
 
-// Random lista generálása
 function generateRandomList() {
-    var listItems = getListItems();
-    var selectedItems = [];
+    var selectedItems = getSelectedItems();
+    var randomList = document.getElementById('randomList');
+    randomList.innerHTML = '';
 
-    // Kiválasztott elemek összegyűjtése
-    for (var j = 0; j < listItems.length; j++) {
-        var checkboxId = "checkbox" + j;
-        var checkbox = document.getElementById(checkboxId);
-
-        if (checkbox.checked) {
-            selectedItems.push(listItems[j]);
-        }
-    }
-
-    // Eredmény lista elérése
-    var randomList = document.getElementById("randomList");
-    randomList.innerHTML = "";
-
-    // Random lista generálása
-    for (var k = 0; k < selectedItems.length; k++) {
-        var listItem = document.createElement("li");
-        listItem.textContent = selectedItems[k];
+    var shuffledItems = shuffleArray(selectedItems); // Shuffle függvény hozzáadása
+    shuffledItems.forEach(function(item) {
+        var listItem = document.createElement('li');
+        listItem.textContent = item;
         randomList.appendChild(listItem);
-    }
+    });
 }
 
-// Az oldal betöltésekor létrehozza a checkboxokat a lementett listából
-var defaultListItems = getListItems();
-createCheckboxes(defaultListItems);
+// Fisher-Yates algoritmus a tömb megkeveréséhez
+function shuffleArray(array) {
+    var currentIndex = array.length, randomIndex, tempValue;
+
+    // Míg még maradnak elemek a tömbben
+    while (currentIndex !== 0) {
+        // Véletlenszerűen válassz ki egy megmaradt elemet
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // Cseréld ki a kiválasztott elemet a jelenlegi elemmel
+        tempValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = tempValue;
+    }
+
+    return array;
+}
+
+function getSelectedItems() {
+    var checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
+    var selectedItems = Array.from(checkboxes).map(function(checkbox) {
+        return checkbox.id;
+    });
+    return selectedItems;
+}
