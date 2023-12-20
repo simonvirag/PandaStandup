@@ -37,29 +37,25 @@ function generateRandomList() {
 
     var selectedItems = getSelectedItems();
     var randomList = document.getElementById('randomList');
-    randomList.innerHTML = ''; // Töröljük a korábbi tartalmat
+    randomList.innerHTML = '';
 
     var shuffledItems = shuffleArray(selectedItems);
 
-    // Lista elemek egyesével való megjelenítése
+    generateButton.classList.remove('button-generate-animation');
+
     shuffledItems.forEach(function(item, index) {
         setTimeout(function() {
             var listItem = document.createElement('li');
-            listItem.textContent = item;
-            listItem.classList.add('fade-in-and-stay'); // Hozzáadjuk az animációt
+            listItem.textContent = (index + 1) + '. ' + item; // Sorszám hozzáadása az elem elé
+            listItem.classList.add('fade-in-and-stay');
             randomList.appendChild(listItem);
 
-                   // Amikor elkészült a lista, megjelenítjük a "Copy to Clipboard" gombot
-                   if (index === shuffledItems.length - 1) {
-                    document.getElementById('copyButton').style.display = 'inline-block';
-                }
-        }, index * 500); // Várakozás az egyes elemek közötti idővel (500 milliszekundum = 0.5 másodperc)
+            // Amikor elkészült a lista, megjelenítjük a "Copy to Clipboard" gombot
+            if (index === shuffledItems.length - 1) {
+                document.getElementById('copyButton').style.display = 'inline-block';
+            }
+        }, index * 500);
     });
-
-    // Gomb animáció eltávolítása a generálás befejeztével
-    setTimeout(function() {
-        generateButton.classList.remove('button-generate-animation');
-    }, shuffledItems.length * 500); // Várakozás az utolsó elem befejezéséig
 }
 
 // Fisher-Yates algoritmus a tömb megkeveréséhez
