@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     createCheckboxes(items);
-    updateList(items);
 });
 
 function createCheckboxes(items) {
@@ -30,7 +29,6 @@ function createCheckboxes(items) {
         checkboxContainer.appendChild(label);
     });
 }
-
 function generateRandomList() {
     var generateButton = document.querySelector('button');
     generateButton.classList.add('button-generate-animation');
@@ -40,8 +38,6 @@ function generateRandomList() {
     randomList.innerHTML = '';
 
     var shuffledItems = shuffleArray(selectedItems);
-
-    generateButton.classList.remove('button-generate-animation');
 
     shuffledItems.forEach(function(item, index) {
         setTimeout(function() {
@@ -53,6 +49,11 @@ function generateRandomList() {
             // Amikor elkészült a lista, megjelenítjük a "Copy to Clipboard" gombot
             if (index === shuffledItems.length - 1) {
                 document.getElementById('copyButton').style.display = 'inline-block';
+
+                // A pulzáló animáció eltávolítása
+                setTimeout(function() {
+                    generateButton.classList.remove('button-generate-animation');
+                }, 1000); // Ez időzítésre a pulzáló animáció hosszához igazítható
             }
         }, index * 500);
     });

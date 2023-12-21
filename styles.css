@@ -101,4 +101,5 @@ input[type="checkbox"] {
 /* A generálás gomb animációjának hozzáadása */
 .button-generate-animation {
     animation: pulse 1s infinite alternate; /* 1 másodperces pulsáló animáció, folyamatosan ismétlődik */
+    transform-origin: center; 
 }
