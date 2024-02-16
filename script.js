@@ -20,7 +20,7 @@ function createCheckboxes(items) {
         var checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.id = item;
-        checkbox.checked = true; // Alapértelmezetten mindenki kiválasztva
+        checkbox.checked = true;
         checkboxContainer.appendChild(checkbox);
 
         var label = document.createElement('label');
@@ -42,18 +42,16 @@ function generateRandomList() {
     shuffledItems.forEach(function(item, index) {
         setTimeout(function() {
             var listItem = document.createElement('li');
-            listItem.textContent = (index + 1) + '. ' + item; // Sorszám hozzáadása az elem elé
+            listItem.textContent = (index + 1) + '. ' + item;
             listItem.classList.add('fade-in-and-stay');
             randomList.appendChild(listItem);
 
-            // Amikor elkészült a lista, megjelenítjük a "Copy to Clipboard" gombot
             if (index === shuffledItems.length - 1) {
                 document.getElementById('copyButton').style.display = 'inline-block';
 
-                // A pulzáló animáció eltávolítása
                 setTimeout(function() {
                     generateButton.classList.remove('button-generate-animation');
-                }, 1000); // Ez időzítésre a pulzáló animáció hosszához igazítható
+                }, 1000); 
             }
         }, index * 500);
     });
@@ -63,13 +61,9 @@ function generateRandomList() {
 function shuffleArray(array) {
     var currentIndex = array.length, randomIndex, tempValue;
 
-    // Míg még maradnak elemek a tömbben
     while (currentIndex !== 0) {
-        // Véletlenszerűen válassz ki egy megmaradt elemet
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
-
-        // Cseréld ki a kiválasztott elemet a jelenlegi elemmel
         tempValue = array[currentIndex];
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = tempValue;
