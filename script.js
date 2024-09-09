@@ -1,9 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     var items = [
-        "Szandi",
         "Bence",
         "Jani",
-        "Laci",
         "Béla",
         "Virág",
         "Gábor",
