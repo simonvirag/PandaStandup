@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
         "Jani",
         "Béla",
         "Virág",
-        "Gábor",
         "Tamás",
         "Dani"
     ];
