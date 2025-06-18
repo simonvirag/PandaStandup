@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
         "Béla",
         "Virág",
         "Tamás",
-        "Dani"
+        "Dani",
+        "Petra"
     ];
 
     createCheckboxes(items);
